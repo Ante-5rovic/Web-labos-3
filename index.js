@@ -256,6 +256,11 @@ function saveToLocalStorage() {
         trenutniBodovi
       );
     }
+  }else{
+    localStorage.setItem(
+        "best score for " + maksimalniBodovi + " blocks",
+        trenutniBodovi
+      );
   }
 }
 
@@ -263,6 +268,7 @@ function saveToLocalStorage() {
 function animate() {
   if (gameOver) {
     // Prikaži poruku "GAME OVER"
+    saveToLocalStorage()
     ctx.clearRect(0, 0, innerWidth2, innerHeight2);
     ctx.shadowColor = "rgba(255, 0, 0, 0.5)";
     ctx.shadowBlur = 10;
@@ -278,6 +284,7 @@ function animate() {
   }
   if (gameWon) {
     // Prikaži poruku "GAME WON"
+    saveToLocalStorage()
     ctx.clearRect(0, 0, innerWidth2, innerHeight2);
     ctx.shadowColor = "rgba(0, 255, 0, 0.5)";
     ctx.shadowBlur = 10;
