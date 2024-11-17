@@ -69,7 +69,7 @@ var najboljiRezultat = 0;
 
 //Blok
 function Squere(position_x, position_y, duzina, visina, block_id, block_color) {
-    //Skoro isto kao i Platforma, vjerovatno se moglo iskoristiti u svrhu smanjnja redundatnosti koda ali radi ispita samo sam kopirao i izmjenio funkciju
+  //Skoro isto kao i Platforma, vjerovatno se moglo iskoristiti u svrhu smanjnja redundatnosti koda ali radi ispita samo sam kopirao i izmjenio funkciju
   this.position_x = position_x;
   this.position_y = position_y;
   this.duzina = duzina;
@@ -132,7 +132,7 @@ function Circle(x, y, dx, dy, radius) {
     ctx.stroke();
     ctx.fill();
   };
-//Provijerava dali je doslo do udarca kuglice od neku stijenku
+  //Provijerava dali je doslo do udarca kuglice od neku stijenku
   this.update = function () {
     if (this.x + this.radius > innerWidth2 || this.x - this.radius < 0) {
       this.dx = -this.dx;
@@ -154,7 +154,6 @@ function Circle(x, y, dx, dy, radius) {
 
 // Platforma
 function Platforma(x, y, duzina, visina) {
-
   this.position_x = x;
   this.position_y = y;
   this.duzina = duzina;
@@ -213,9 +212,9 @@ function Platforma(x, y, duzina, visina) {
 var loptica = new Circle(x, y, dx, dy, radius);
 
 function init() {
-//Funkcija koja inicializira blokove
-//Stavljeno je u funkciju da omoguci responzivnost, odnosno povecanje i smanjivanje ekrana uz ocuvanu funkcionalnost
-//resaze resetira igricu, ostavio sam tako jer ne piše drugacije
+  //Funkcija koja inicializira blokove
+  //Stavljeno je u funkciju da omoguci responzivnost, odnosno povecanje i smanjivanje ekrana uz ocuvanu funkcionalnost
+  //resaze resetira igricu, ostavio sam tako jer ne piše drugacije
   blokList = [];
   duzina_bloka = innerWidth2 / brojBlokovaPoRedu;
   for (var i = 0; i < brojRedovaBlokova; i++) {
@@ -345,7 +344,7 @@ function animate() {
     loptica.y,
     loptica.radius
   );
-//Mijenjanje smijera loptice nakon kolizije s platformom
+  //Mijenjanje smijera loptice nakon kolizije s platformom
   if (platformCollision.collided) {
     console.log("sudar");
     loptica.dy = -Math.abs(loptica.dy);
