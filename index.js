@@ -1,7 +1,7 @@
 //================================================================================================
 //Varijable
 //Neke važne varijable za prilagodbu igrice
-//Mogu pomoći za testirane pozitivnog ishoda igrice smanjenjem brojRedovaBlokova i brojBlokovaPoRedu
+//Mogu pomoći za testiranje pozitivnog ishoda igrice smanjenjem brojRedovaBlokova i brojBlokovaPoRedu
 const brojRedovaBlokova = 5;
 const brojBlokovaPoRedu = 7;
 const visina_bloka = 30;
@@ -21,7 +21,7 @@ kanves.style.border = "10px solid black";
 
 var innerWidth2 = window.innerWidth - 20;
 var innerHeight2 = window.innerHeight - 20;
-//Omogucuje dinamicko sucelje
+//Omogućuje dinamičko sučelje
 window.addEventListener("resize", function () {
   console.log("hey");
   kanves.width = window.innerWidth - 20;
@@ -29,7 +29,7 @@ window.addEventListener("resize", function () {
   innerWidth2 = window.innerWidth - 20;
   innerHeight2 = window.innerHeight - 20;
 });
-//Omogucuje dinamicko sucelje
+//Omogućuje dinamičko sučelje
 window.addEventListener("resize", function () {
   init();
 });
@@ -52,7 +52,7 @@ document.addEventListener("keyup", function (e) {
   }
 });
 
-//Pomocne varijable
+//Pomoćne varijable
 var radius = 12;
 var x = innerWidth2 / 2;
 var y = innerHeight2 - 45 - radius;
@@ -69,7 +69,7 @@ var najboljiRezultat = 0;
 
 //Blok
 function Squere(position_x, position_y, duzina, visina, block_id, block_color) {
-  //Skoro isto kao i Platforma, vjerovatno se moglo iskoristiti u svrhu smanjnja redundatnosti koda ali radi ispita samo sam kopirao i izmjenio funkciju
+  //Skoro isto kao i Platforma, vjerojatno se moglo iskoristiti u svrhu smanjenja redundantnosti koda, ali radi ispita samo sam kopirao i izmijenio funkciju
   this.position_x = position_x;
   this.position_y = position_y;
   this.duzina = duzina;
@@ -132,7 +132,7 @@ function Circle(x, y, dx, dy, radius) {
     ctx.stroke();
     ctx.fill();
   };
-  //Provijerava dali je doslo do udarca kuglice od neku stijenku
+  //Provjerava je li došlo do udarca kuglice o neku stijenku
   this.update = function () {
     if (this.x + this.radius > innerWidth2 || this.x - this.radius < 0) {
       this.dx = -this.dx;
@@ -142,7 +142,7 @@ function Circle(x, y, dx, dy, radius) {
     }
     if (this.y + this.radius > innerHeight2) {
       //GAME OVER
-      //Kada loptica udari u donju stjenku zavrsava igra
+      //Kada loptica udari u donju stjenku završava igra
       //alert(brojBlokovaPoRedu * brojRedovaBlokova - blokList.length);
       gameOver = true;
     }
@@ -167,7 +167,7 @@ function Platforma(x, y, duzina, visina) {
     ctx.fillStyle = "#3C3D37F";
     ctx.fillRect(this.position_x, this.position_y, this.duzina, this.visina);
   };
-  //Updejta platformu (pomice lijevo desno uz pomoc eventListenera)
+  //Ažurira platformu (pomiče lijevo-desno uz pomoć eventListenera)
   this.update = function () {
     if (this.lijevoPritisnuto && this.position_x > 0) {
       this.position_x -= this.brzina;
@@ -175,11 +175,11 @@ function Platforma(x, y, duzina, visina) {
     if (this.desnoPritisnuto && this.position_x + this.duzina < innerWidth2) {
       this.position_x += this.brzina;
     }
-    //Nakon pomicanja izcrtava novu poziciju
+    //Nakon pomicanja iscrtava novu poziciju
     this.draw();
   };
   this.collisionAcured = function (circle_x, circle_y, circle_radius) {
-    //Funkcija koja na temelju udaljenosti kruga(kublice) i pravokutnika(bloka) daje informacije o prijesejku i vrsti(jeli bocni ili gornji odnosno donji)
+    //Funkcija koja na temelju udaljenosti kruga (loptice) i pravokutnika (bloka) daje informacije o presjeku i vrsti (je li bočni ili gornji odnosno donji)
     const rectTop = this.position_y;
     const rectBottom = this.position_y + this.visina;
     const rectLeft = this.position_x;
@@ -212,9 +212,9 @@ function Platforma(x, y, duzina, visina) {
 var loptica = new Circle(x, y, dx, dy, radius);
 
 function init() {
-  //Funkcija koja inicializira blokove
-  //Stavljeno je u funkciju da omoguci responzivnost, odnosno povecanje i smanjivanje ekrana uz ocuvanu funkcionalnost
-  //resaze resetira igricu, ostavio sam tako jer ne piše drugacije
+  //Funkcija koja inicijalizira blokove
+  //Stavljeno je u funkciju da omogući responzivnost, odnosno povećanje i smanjivanje ekrana uz očuvanu funkcionalnost
+  //Resize resetira igricu, ostavio sam tako jer ne piše drugačije
   blokList = [];
   duzina_bloka = innerWidth2 / brojBlokovaPoRedu;
   for (var i = 0; i < brojRedovaBlokova; i++) {
@@ -242,10 +242,10 @@ var platforma = new Platforma(
   20
 );
 
-//Spremanje u loclastorage
+//Spremanje u LocalStorage
 function saveToLocalStorage() {
-  //Spremam na nacin da za maksimalnu kolicinu bodova spremim najbolji rezultat
-  //Ostavio sam podatke u localstorage jer ne piše nigdje da ih se treba prikazati
+  //Spremam na način da za maksimalnu količinu bodova spremim najbolji rezultat
+  //Ostavio sam podatke u LocalStorage jer ne piše nigdje da ih se treba prikazati
   var inLocalStorage = localStorage.getItem(
     "best score for " + maksimalniBodovi + " blocks"
   );
@@ -292,7 +292,7 @@ function animate() {
     return;
   }
 
-  //Pobrisi canves
+  //Obriši canvas
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, innerWidth2, innerHeight2);
 
@@ -300,17 +300,17 @@ function animate() {
     blokList[i].draw();
   }
 
-  //Dodaje display bodova
+  //Prikazuje bodove
   ctx.font = "30px Arial";
   ctx.fillStyle = "black";
   ctx.textAlign = "right";
   ctx.textBaseline = "top";
   ctx.fillText(trenutniBodovi + " / " + maksimalniBodovi, innerWidth2 - 20, 30);
 
-  //Poziva funkciju za osvijezavanje platforme
+  //Poziva funkciju za ažuriranje platforme
   platforma.update();
 
-  //Poziva osvijezavanje svih blokova
+  //Poziva ažuriranje svih blokova
   for (var j = 0; j < blokList.length; j++) {
     //Provjera kolizije
     const collision = blokList[j].collisionAcured(
@@ -328,34 +328,34 @@ function animate() {
         loptica.y += loptica.dy > 0 ? -collision.overlap : collision.overlap;
         loptica.dy = -loptica.dy;
       }
-      //Micanje bloka iz liste i update bodova
+      //Micanje bloka iz liste i ažuriranje bodova
       blokList.splice(j, 1);
       j--;
       trenutniBodovi = maksimalniBodovi - blokList.length;
     }
-    //Uvijet za pobjedu
+    //Uvjet za pobjedu
     if (blokList.length <= 0) {
       gameWon = true;
     }
   }
-  //Provjera kolizije sa platformom
+  //Provjera kolizije s platformom
   var platformCollision = platforma.collisionAcured(
     loptica.x,
     loptica.y,
     loptica.radius
   );
-  //Mijenjanje smijera loptice nakon kolizije s platformom
+  //Mijenjanje smjera loptice nakon kolizije s platformom
   if (platformCollision.collided) {
     console.log("sudar");
     loptica.dy = -Math.abs(loptica.dy);
-    //Na temelju omjer (koliko daleko od sredine) mijenjma dx(komponentu brzine u x smijeru) da dodam realističnost
+    //Na temelju omjera (koliko daleko od sredine) mijenjam dx (komponentu brzine u x smjeru) da dodam realističnost
     var relativeHitPosition =
       (loptica.x - (platforma.position_x + platforma.duzina / 2)) /
       (platforma.duzina / 2);
     loptica.dx = relativeHitPosition * 3;
   }
 
-  //Anzuriranje loptice
+  //Ažuriranje loptice
   loptica.update();
 }
 
